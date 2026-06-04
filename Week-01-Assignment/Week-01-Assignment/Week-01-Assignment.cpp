@@ -1,99 +1,124 @@
-// Week-01-Assignment.cpp : This file contains the 'main' function. Program execution begins and ends there.
-//
-
 #include <iostream>
 #include <string>
 using namespace std;
 
-class Author {
+// Creating a class for Author.
+class Author
+{
+// These variables can only be used inside of the Author class. 
 private:
     string name;
     string email;
     char gender;
 
+// These variables can be used outside of the private Author class.
 public:
-    Author(string name, string email, char gender) {
-        this->name = name;
-        this->email = email;
-        this->gender = gender;
+    Author(string n, string e, char g)
+    {
+        name = n;
+        email = e;
+        gender = g;
     }
 
-    string getName() {
+    // making some functions to return the values.
+    string getName()
+    {
         return name;
     }
 
-    string getEmail() {
+    string getEmail()
+    {
         return email;
     }
 
-    void setEmail(string email) {
-        this->email = email;
+    // Sets email values.
+    void setEmail(string e)
+    {
+        email = e;
     }
 
-    char getGender() {
+    char getGender()
+    {
         return gender;
     }
-
-    string print() {
-        string result = name + " (";
-        result += gender;
-        result += ") at " + email;
-        return result;
+    
+    // print the author info.
+    void print()
+    {
+        cout << name << " (" << gender << ") at " << email << endl;
     }
 };
 
-class Book {
+// I pretty much just followed the same format as the for the Author class above.
+class Book
+{
 private:
     string name;
     Author author;
     double price;
 
 public:
-    Book(string name, Author author, double price) : author(author) {
-        this->name = name;
-        this->price = price;
+    Book(string n, Author a, double p) : author(a)
+    {
+        name = n;
+        price = p;
     }
 
-    string getName() {
+    string getName()
+    {
         return name;
     }
 
-    Author getAuthor() {
+    Author getAuthor()
+    {
         return author;
     }
 
-    double getPrice() {
+    double getPrice()
+    {
         return price;
     }
 
-    void setPrice(double price) {
-        this->price = price;
+    void setPrice(double p)
+    {
+        price = p;
     }
 
-    string print() {
-        return name + " by " + author.print();
+    void print()
+    {
+        cout << name << " by ";
+        author.print();
     }
 };
 
-int main() {
-    Author author1("Mike", "mJones@somewhere.com", 'm');
 
-    Book book1("Introduction to Programming", author1, 59.99);
+int main()
+{
+    // making an object from the class Author.  And hard setting the values to the instructions.
+    Author a1("Mike Jones", "mJones@somewhere.com", 'm');
 
-    cout << "Author Information:" << endl;
-    cout << author1.print() << endl;
+    // printing the object info.
+    cout << "Author:" << endl;
+    a1.print();
 
+    // making an object from the class book.  And hard setting the values to the instructions.
+    Book b1("Introduction to Programming", a1, 49.99);
+
+    // printing the object info.
     cout << endl;
+    cout << "Book:" << endl;
+    b1.print();
+    cout << "Price: $" << b1.getPrice() << endl;
 
-    cout << "Book Information:" << endl;
-    cout << book1.print() << endl;
-    cout << "Price: $" << book1.getPrice() << endl;
-
+    // setting the price of the book.
     cout << endl;
+    cout << "Changing price..." << endl;
+    b1.setPrice(39.99);
 
-    book1.setPrice(49.99);
-
-    cout << "Updated Book Price: $" << book1.getPrice() << endl;
+    // printing the price.
+    cout << "Book after price change:" << endl;
+    b1.print();
+    cout << "Price: $" << b1.getPrice() << endl;
 
     return 0;
 }
